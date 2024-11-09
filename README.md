@@ -1,12 +1,4 @@
-# EDtunnel
-
-<p align="center">
-  <img src="https://ipfs.io/ipfs/bafybeigd6i5aavwpr6wvnwuyayklq3omonggta4x2q7kpmgafj357nkcky" alt="edgetunnel" style="margin-bottom: -50px;">
-</p>
-
-GitHub Repository for [https://github.com/zizifn/edgetunnel](https://github.com/zizifn/edgetunnel)
-
-ask question and cloudflare ips: [https://t.me/edtunnel](https://t.me/edtunnel)
+# EDtunnel-rev
 
 [![Repository](https://img.shields.io/badge/View%20on-GitHub-blue.svg)](https://github.com/zizifn/edgetunnel)
 
