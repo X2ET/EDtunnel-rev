@@ -1085,140 +1085,223 @@ function getConfig(userIDs, hostName) {
 	const clash_link = `https://url.v1.mk/sub?target=clash&url=${encodeURIComponent(sublink)}&insert=false&emoji=true&list=false&tfo=false&scv=true&fdn=false&sort=false&new_name=true`;
 	// HTML Head with CSS and FontAwesome library
 	const htmlHead = `
-  <head>
-    <title>EDtunnel: Configuration</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <meta property='og:site_name' content='EDtunnel: Protocol Configuration' />
-    <meta property='og:type' content='website' />
-    <meta property='og:title' content='EDtunnel - Protocol Configuration and Subscribe Output' />
-    <meta property='og:description' content='Use Cloudflare Pages and Worker serverless to implement protocol' />
-    <meta property='og:url' content='https://${hostName}/' />
-    <meta property='og:image' content='https://ipfs.io/ipfs/bafybeigd6i5aavwpr6wvnwuyayklq3omonggta4x2q7kpmgafj357nkcky' />
-    <meta name='twitter:card' content='summary_large_image' />
-    <meta name='twitter:title' content='EDtunnel - Protocol Configuration and Subscribe Output' />
-    <meta name='twitter:description' content='Use Cloudflare Pages and Worker serverless to implement protocol' />
-    <meta name='twitter:url' content='https://${hostName}/' />
-    <meta name='twitter:image' content='https://ipfs.io/ipfs/bafybeigd6i5aavwpr6wvnwuyayklq3omonggta4x2q7kpmgafj357nkcky' />
-    <meta property='og:image:width' content='1500' />
-    <meta property='og:image:height' content='1500' />
+ <head>
+  <title>EDtunnel: Configuration</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta property='og:site_name' content='EDtunnel: Protocol Configuration' />
+  <meta property='og:type' content='website' />
+  <meta property='og:title' content='EDtunnel - Protocol Configuration and Subscribe Output' />
+  <meta property='og:description' content='Use Cloudflare Pages and Worker serverless to implement protocol' />
+  <meta property='og:url' content='https://${hostName}/' />
+  <meta property='og:image' content='https://ipfs.io/ipfs/bafybeigd6i5aavwpr6wvnwuyayklq3omonggta4x2q7kpmgafj357nkcky' />
+  <meta name='twitter:card' content='summary_large_image' />
+  <meta name='twitter:title' content='EDtunnel - Protocol Configuration and Subscribe Output' />
+  <meta name='twitter:description' content='Use Cloudflare Pages and Worker serverless to implement protocol' />
+  <meta name='twitter:url' content='https://${hostName}/' />
+  <meta name='twitter:image' content='https://ipfs.io/ipfs/bafybeigd6i5aavwpr6wvnwuyayklq3omonggta4x2q7kpmgafj357nkcky' />
+  <meta property='og:image:width' content='1500' />
+  <meta property='og:image:height' content='1500' />
 
-    <style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://ipfs.io/ipfs/bafybeigd6i5aavwpr6wvnwuyayklq3omonggta4x2q7kpmgafj357nkcky/favicon.png" type="image/png">
+
+  <style>
+    /* Basic Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Base Styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .container {
+      background-color: rgba(17, 17, 17, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    h1, h2, h3 {
+      color: #ffffff;
+      margin-bottom: 15px;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: 2em;
+      text-align: center;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #444444;
+    }
+
+    .config-item {
+      background-color: rgba(34, 34, 34, 0.9);
+      border: 1px solid #333333;
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.2s ease;
+    }
+    .config-item:hover {
+      transform: scale(1.02);
+    }
+
+    .config-item h3 {
+      margin-top: 0;
+      color: #f2f2f2;
+    }
+
+    .btn {
+      background-color: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #f2f2f2;
+      color: #111111;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    pre {
+      background-color: rgba(51, 51, 51, 0.9);
+      border: 1px solid #444444;
+      border-radius: 4px;
+      padding: 15px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: #00ff00;
+      overflow-x: auto;
+      font-size: 0.9em;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .logo {
+      max-width: 25%;
+      display: block;
+      margin: 0 auto 20px;
+      border-radius: 8px;
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 768px) {
       body {
-        font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #000000;
-        color: #ffffff;
-        line-height: 1.6;
-        padding: 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      .container {
-        background-color: #111111;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
-        padding: 20px;
-        margin-bottom: 20px;
-      }
-      h1, h2 {
-        color: #ffffff;
-      }
-      .config-item {
-        background-color: #222222;
-        border: 1px solid #333333;
-        border-radius: 4px;
-        padding: 15px;
-        margin-bottom: 15px;
-      }
-      .config-item h3 {
-        margin-top: 0;
-        color: #ffffff;
-      }
-      .btn {
-        background-color: #ffffff;
-        color: #000000;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-      }
-      .btn:hover {
-        background-color: #cccccc;
+        padding: 10px;
       }
       .btn-group {
-        margin-top: 10px;
+        flex-direction: column;
+        width: 100%;
       }
       .btn-group .btn {
-        margin-right: 10px;
-      }
-      pre {
-        background-color: #333333;
-        border: 1px solid #444444;
-        border-radius: 4px;
-        padding: 10px;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        color: #00ff00;
-      }
-      .logo {
-        float: left;
-        margin-right: 20px;
-        margin-bottom: 20px;
-		max-width: 30%;
-      }
-      @media (max-width: 768px) {
-        .logo {
-          float: none;
-          display: block;
-          margin: 0 auto 20px;
-          max-width: 90%; /* Adjust the max-width to fit within the container */
-        }
-        .btn-group {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        .btn-group .btn {
-          margin-bottom: 10px;
-          width: 100%;
-          text-align: center;
-        }
-      }
-      .code-container {
-        position: relative;
-        margin-bottom: 15px;
-      }
-      .code-container pre {
-        margin: 0;
-        padding-right: 100px; /* Make space for the button */
-      }
-      .copy-btn {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        padding: 5px 10px;
-        font-size: 0.8em;
-      }
-      .subscription-info {
-        margin-top: 20px;
-        background-color: #222222;
-        border-radius: 4px;
-        padding: 15px;
-      }
-      .subscription-info h3 {
-        color: #ffffff;
-        margin-top: 0;
-      }
-      .subscription-info ul {
-        padding-left: 20px;
-      }
-      .subscription-info li {
+        width: 100%;
         margin-bottom: 10px;
       }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  </head>
-  `;
+      h1 {
+        font-size: 1.5em;
+      }
+    }
+
+    /* Code Container */
+    .code-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .code-container pre {
+      padding-right: 110px;
+    }
+
+    /* Copy Button */
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #444444;
+      color: #ffffff;
+      border: none;
+      padding: 5px 12px;
+      font-size: 0.8em;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .copy-btn:hover {
+      background-color: #555555;
+    }
+
+    /* Subscription Information Section */
+    .subscription-info {
+      background: rgba(34, 34, 34, 0.85);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      margin-top: 25px;
+    }
+    .subscription-info h3 {
+      color: #ffffff;
+    }
+    .subscription-info ul {
+      padding-left: 20px;
+      list-style-type: square;
+    }
+    .subscription-info li {
+      margin-bottom: 12px;
+      color: #cccccc;
+    }
+
+    /* Footer Section */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #aaaaaa;
+      border-top: 1px solid #444444;
+      margin-top: 30px;
+    }
+    .footer a {
+      color: #00ff00;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Scroll Animation */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+
 
 	const header = `
     <div class="container">
